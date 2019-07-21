@@ -230,10 +230,10 @@ class ViewController: UIViewController {
         }
         
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)), mode: AVAudioSession.Mode.spokenAudio)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            player = try AVAudioPlayer(data: sound.data, fileTypeHint: AVFileTypeAppleM4V)
+            player = try AVAudioPlayer(data: sound.data, fileTypeHint: convertFromAVFileType(AVFileType.m4v))
             
             player!.play()
         } catch let error as NSError {
@@ -242,3 +242,13 @@ class ViewController: UIViewController {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVFileType(_ input: AVFileType) -> String {
+	return input.rawValue
+}
