@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  DarthGenius
+//  LordBoard
 //
 //  Created by Todd Bruss on 10/22/16.
 //  Copyright © 2016 Todd Bruss. All rights reserved.
@@ -8,8 +8,6 @@
 
 import UIKit
 
-import AVFoundation
-var player: AVAudioPlayer? // declere this outside
 
 class ViewController: UIViewController {
     
@@ -223,32 +221,8 @@ class ViewController: UIViewController {
     }
     
     
-    func playSound(thisSound: String) {
-        guard let sound = NSDataAsset(name: thisSound) else {
-            print("asset not found")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)), mode: AVAudioSession.Mode.spokenAudio)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            player = try AVAudioPlayer(data: sound.data, fileTypeHint: convertFromAVFileType(AVFileType.m4v))
-            
-            player!.play()
-        } catch let error as NSError {
-            print("error: \(error.localizedDescription)")
-        }
-    }
+    
 }
 
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
-}
 
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVFileType(_ input: AVFileType) -> String {
-	return input.rawValue
-}
